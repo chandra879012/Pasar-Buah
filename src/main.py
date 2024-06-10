@@ -1,28 +1,50 @@
+import mylib
+
 print('Selamat Datang di Pasar Buah')
 
-#minta input user
-nApel= int(input('masukan jumlah Apel:'))
-nJeruk= int(input('masukan jumlah Jeruk:'))
-nAnggur= int(input('masukan jumlah Anggur:'))
+#Definisikan stock buah 
+stockApel = 10
+stockJeruk = 8
+StockAnggur = 15
 
 #Definisikan harga buah
-hargaApel =10000
-hargaJeruk =15000
-hargaAnggur =20000
+hargaApel = 10000
+hargaJeruk = 15000
+hargaAnggur = 20000
 
-#Hitung total harga per buah
-totalHargaApel=nApel*hargaApel
-totalHargaJeruk=nJeruk*hargaJeruk
-totalHargaAnggur=nAnggur*hargaAnggur
+#Minta input jumlah buah apel dan hitung harga buah
+nApel, totalHargaApel =mylib.inputBuah(nama='apel',stock=stockApel, harga=hargaApel)
+nJeruk, totalHargaJeruk =mylib.inputBuah(nama='jeruk',stock=stockJeruk, harga=hargaJeruk)
+nAnggur, totalHargaAnggur =mylib.inputBuah(nama='anggur',stock=StockAnggur, harga=hargaAnggur)
 
-#hitung total harga belanja
-totalBelanja=totalHargaApel+totalHargaJeruk+totalHargaAnggur
+# Hitung total harga belanja
+totalBelanja = totalHargaApel + totalHargaJeruk + totalHargaAnggur
 
-#Tampilkan rincian belanja
+# Tampilkan rincian belanja
 print(f'''
 Detail Belanja
-Apel: {nApel}x{hargaApel} = {totalHargaApel}
-Jeruk: {nJeruk}x{hargaJeruk} = {totalHargaJeruk}
-Anggur: {nAnggur}x{hargaAnggur} = {totalHargaAnggur}
-total:{totalBelanja}
+      
+Apel: {nApel} x {hargaApel} = {totalHargaApel}
+Jeruk: {nJeruk} x {hargaJeruk} = {totalHargaJeruk}
+Anggur: {nAnggur} x {hargaAnggur} = {totalHargaAnggur}
+
+Total: {totalBelanja}
 ''')
+
+# Proses pembayaran
+while True:
+    # Input jumlah uang
+    bayar = int(input('Silahkan masukkan uang Anda: '))
+
+    # Hitung selisih antara bayar dengan total
+    selisih = totalBelanja - bayar
+
+    # Bandingkan antara uang dengan total harga
+    if selisih > 0: 
+        print(f'Uang Anda kurang sebesar Rp.{selisih}')
+        continue
+    
+    # Ucapkan terima kasih ketika selesai pembayaran
+    else:
+        print(f'''Terimakasih. Uang kembalian Anda: {abs(selisih)}''')
+        break
